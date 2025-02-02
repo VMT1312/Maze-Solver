@@ -2,7 +2,7 @@ from window import Line, Point, Window
 
 
 class Cell:
-    def __init__(self, win=None):
+    def __init__(self, win=None, visited = False):
         self.has_left_wall = True
         self.has_right_wall = True
         self.has_top_wall = True
@@ -13,6 +13,7 @@ class Cell:
         self.__y1 = None
         self.__y2 = None
         self.__win = win
+        self.visited = visited
 
     def draw(self, x1, x2, y1, y2):
         if self.__win is None:
