@@ -1,20 +1,25 @@
-from window import Line, Point
+from window import Line, Point, Window
 
 
 class Cell:
-    def __init__(self, x1, x2, y1, y2, win):
+    def __init__(self, win=Window):
         self.has_left_wall = True
         self.has_right_wall = True
         self.has_top_wall = True
         self.has_bottom_wall = True
 
+        self.__x1 = None
+        self.__x2 = None
+        self.__y1 = None
+        self.__y2 = None
+        self.__win = win
+
+    def draw(self, x1, x2, y1, y2):
         self.__x1 = x1
         self.__x2 = x2
         self.__y1 = y1
         self.__y2 = y2
-        self.__win = win
 
-    def draw(self):
         if self.has_left_wall:
             self.__win.draw_line(
                 Line(
@@ -45,10 +50,4 @@ class Cell:
                     Point(self.__x1, self.__y2),
                     Point(self.__x2, self.__y2)
                 )
-            )
-
-    def draw_move(self, to_cell, undo=False):
-        if undo:
-            line = Line(
-                
             )
