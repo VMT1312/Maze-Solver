@@ -1,15 +1,13 @@
 from window import Window, Line, Point
+from cell import Cell
 
 
 def main():
     win = Window(800, 600)
-    win.draw_line(
-        Line(
-            Point(1, 1),
-            Point(100, 8)
-        ),
-        'red'
-    )
+    cell1 = Cell(win)
+    cell1.draw(100, 125, 300, 400)
+    cell2 = Cell(win)
+    cell2.draw(500, 250, 10, 20)
     win.wait_for_close()
 
 
