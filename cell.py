@@ -65,6 +65,6 @@ class Cell:
             )
         
         if undo:
-            line.draw(self.__win.__canvas, 'red')
+            self.__win.draw_line(line, 'gray')
         else:
-            line.draw(self.__win.__canvas, 'gray')
+            self.__win.draw_line(line, 'red')
