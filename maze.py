@@ -65,14 +65,14 @@ class Maze:
         self._draw_cell(0, 0)
 
         self._cells[-1][-1].has_bottom_wall = False
-        self._draw_cell(-1, -1)
+        self._draw_cell(self.num_cols - 1, self.num_rows -1)
 
     def _break_walls_r(self, i, j):
         self._cells[i][j].visited = True
         while True:
             to_visit = []
             # Check left
-            if (i - 1) >= 0 and (i - 1) < self.num_cols:
+            if i > 0 and (i - 1) < self.num_cols:
                 if not self._cells[i - 1][j].visited:
                     to_visit.append((i-1, j))
             # Check right
@@ -80,7 +80,7 @@ class Maze:
                 if not self._cells[i + 1][j].visited:
                     to_visit.append((i + 1, j))
             # Check up
-            if (j - 1) >= 0 and (j - 1) < self.num_rows:
+            if j > 0 and (j - 1) < self.num_rows:
                 if not self._cells[i][j - 1].visited:
                     to_visit.append((i, j - 1))
             # Check down
@@ -89,24 +89,24 @@ class Maze:
                     to_visit.append((i, j + 1))
 
             if len(to_visit) == 0:
-                print(f"No more neighbors at ({i}, {j})")
                 self._draw_cell(i, j)
                 return
 
             direction = random.randrange(len(to_visit))
             next_i, next_j = to_visit[direction]
+
             if next_i < i:
-                self._cells[i][j].has_top_wall = False
-                self._cells[next_i][j].has_bottom_wall = False
-            elif next_i > i:
-                self._cells[i][j].has_bottom_wall = False
-                self._cells[next_i][next_j].has_top_wall = False
-            elif next_j < j:
                 self._cells[i][j].has_left_wall = False
-                self._cells[next_i][next_j].has_right_wall = False
-            else:
+                self._cells[next_i][j].has_right_wall = False
+            elif next_i > i:
                 self._cells[i][j].has_right_wall = False
                 self._cells[next_i][next_j].has_left_wall = False
+            elif next_j < j:
+                self._cells[i][j].has_top_wall = False
+                self._cells[next_i][next_j].has_bottom_wall = False
+            else:
+                self._cells[i][j].has_bottom_wall = False
+                self._cells[next_i][next_j].has_top_wall = False
             self._break_walls_r(next_i, next_j)
         
 
